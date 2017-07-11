@@ -1,3 +1,9 @@
 .app-container{
 	padding: 10%;
 }
+.routes{
+	margin-top: 15%;
+}
+.routes b{
+	text-transform: capitalize;
+}

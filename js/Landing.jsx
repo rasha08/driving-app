@@ -2,39 +2,20 @@ import React, { Component } from 'react';
 import Routes from './Routes';
 
 class Landing extends Component {
-  constructor() {
+  constructor(props) {
     super();
-
     this.state = {
       startPoint: '',
       endPoint: '',
-      routes: JSON.parse(localStorage.getItem('routes')) || []
+      props
     };
-    this.addRoute = this.addRoute.bind(this);
-  }
-
-  addRoute(event) {
-    event.preventDefault();
-    const start = this.state.startPoint;
-    const end = this.state.endPoint;
-    const id = this.state.routes.length + 1;
-    const route = {
-      id,
-      start,
-      end
-    };
-    this.state.routes.push(route);
-    localStorage.setItem('routes', JSON.stringify(this.state.routes));
-    this.setState({
-      routes: this.state.routes
-    });
   }
 
   render() {
     return (
       <div className="container app-container">
         <div className="form-group">
-          <div className="col-md-4">
+          <div className="col-sm-4">
             <input
               type="text"
               className="form-control"
@@ -47,7 +28,7 @@ class Landing extends Component {
               }}
             />
           </div>
-          <div className="col-md-5">
+          <div className="col-sm-5">
             <input
               type="text"
               className="form-control"
@@ -58,13 +39,18 @@ class Landing extends Component {
               }}
             />
           </div>
-          <div className="col-md-3">
-            <button className="btn btn-block btn-primary" onClick={event => this.addRoute(event)}>Submit</button>
+          <div className="col-sm-3">
+            <button
+              className="btn btn-block btn-primary"
+              onClick={(event) => this.props.addRoute(event, this.state.startPoint, this.state.endPoint)}
+            >
+              Submit
+            </button>
           </div>
         </div>
 
         <div className="routes">
-          <Routes routes={this.state.routes} />
+          <Routes routes={this.props.routes} removeRoute={this.props.removeRoute} openRouteDetails={this.props.openRouteDetails}/>
         </div>
       </div>
     );
