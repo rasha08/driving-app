@@ -1,29 +1,3 @@
 .app-container{
-	width:90vw;
-	background-color: snow;
-	padding: 5%;
-}
-.colum-4{
-	width:35%;
-}
-.colum-5{
-	width: 45%;
-}
-.colum-1{
-	width: 10%;
-}
-.form-input{
-	margin: 2%;
-	min-height: 30px;
-}
-.button{
-	min-height: 35px;
-	border-radius: 3px;
-	border: 1px solid #fff;
-	min-width: 150px;	
-}
-.button-default{
-	background-color: #198CFF;
-	color: snow;
-	font-size: 20px;
+	padding: 10%;
 }
