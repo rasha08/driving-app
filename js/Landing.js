@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Routes from './Routes';
+import PropTypes from 'prop-types';
 
 class Landing extends Component {
   constructor(props) {
@@ -42,7 +43,13 @@ class Landing extends Component {
           <div className="col-sm-3">
             <button
               className="btn btn-block btn-primary"
-              onClick={(event) => this.props.addRoute(event, this.state.startPoint, this.state.endPoint)}
+              onClick={event => {
+                if (this.state.startPoint && this.state.endPoint) {
+                  this.props.addRoute(event, this.state.startPoint, this.state.endPoint);
+                } else {
+                  return;
+                }
+              }}
             >
               Submit
             </button>
@@ -50,11 +57,20 @@ class Landing extends Component {
         </div>
 
         <div className="routes">
-          <Routes routes={this.props.routes} removeRoute={this.props.removeRoute} openRouteDetails={this.props.openRouteDetails}/>
+          <Routes
+            routes={this.props.routes}
+            removeRoute={this.props.removeRoute}
+            openRouteDetails={this.props.openRouteDetails}
+          />
         </div>
       </div>
     );
   }
 }
-
+Landing.propTypes = {
+  routes: PropTypes.array.isRequired,
+  addRoute: PropTypes.func.isRequired,
+  removeRoute: PropTypes.func.isRequired,
+  openRouteDetails: PropTypes.func.isRequired
+};
 export default Landing;

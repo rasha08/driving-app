@@ -1,49 +1,27 @@
 const path = require('path');
-const webpack = require('webpack');
-
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
+  template: './public/index.html',
+  filename: 'index.html'
+})
 module.exports = {
-	context: __dirname,
-	entry:[
-		"react-hot-loader/patch",
-		"webpack-dev-server/client?http://localhost:8080",
-		"webpack/hot/only-dev-server",
-		"./js/ClientApp.jsx"
-		],
-	devtool: "cheap-eval-source-map",
-	output:{
-		path: path.join(__dirname, 'public'),
+  entry: './js/index.js',
+  output: {
+    path: path.join(__dirname, 'public'),
 		filename: 'bundle.js',
 		publicPath: '/public/'
-	},
+  },
 	devServer:{
-		hot: true,
 		publicPath: '/public/',
 		historyApiFallback: true
 	},
 	resolve:{
 		extensions: ['.js', '.jsx', '.json']
 	},
-	stats:{
-		color:true,
-		reasons: true,
-		chunks: false
-	},
-	plugins:[
-		new webpack.HotModuleReplacementPlugin(),
-		new webpack.NamedModulesPlugin()
-	],
-	module:{
-		rules:[
-			{
-				enforce:'pre',
-				test: /\.jsx?$/,
-				loader: 'eslint-loader',
-				exclude:/node_modules/
-			},
-			{
-				test: /\.jsx?$/,
-				loader: 'babel-loader'
-			}
-		]
-	}
+  module: {
+    loaders: [
+      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
+    ]
+  }
 }
